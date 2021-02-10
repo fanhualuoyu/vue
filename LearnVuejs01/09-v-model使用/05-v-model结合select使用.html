@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+  <!--1.选择一个-->
+  <select name="city" v-model="city">
+    <option value="上海">上海</option>
+    <option value="北京">北京</option>
+    <option value="郑州">郑州</option>
+  </select>
+  <h2>您选中的城市是:{{city}}</h2>
+
+  <!--2.选择多个-->
+  <select name="citys" v-model="citys" multiple>
+    <option value="上海">上海</option>
+    <option value="北京">北京</option>
+    <option value="郑州">郑州</option>
+  </select>
+</div>
+
+<script src="../js/vue.min.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: '你好啊',
+      city: '上海',
+      citys: []
+    }
+  })
+</script>
+
+</body>
+</html>

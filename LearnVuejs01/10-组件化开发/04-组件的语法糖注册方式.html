@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+  <cpn1></cpn1>
+  <cpn2></cpn2>
+</div>
+
+<script src="../js/vue.min.js"></script>
+<script>
+  //全局组件语法糖
+  //1.创建组件构造器
+  //const cpn1 = Vue.extend()
+
+  //2.注册组件
+  Vue.component('cpn1',{
+    template: `
+    <div>
+      <h2>标题（1）</h2>
+      <p>内容（1）</p>
+    </div>`
+  })
+
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: '你好啊'
+    },
+    components: {
+      'cpn2': {
+        template: `
+          <div>
+            <h2>标题（2）</h2>
+            <p>内容（2）</p>
+          </div>`
+      }
+    }
+  })
+</script>
+
+</body>
+</html>

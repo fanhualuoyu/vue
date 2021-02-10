@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+  <!-- 
+    1.app.message修改数据，vue的内容是如何监听message数据的改变？
+    答：Object.defineProperty -> 监听对象属性的改变
+    2.当数据发生改变，vue是如何知道要通知哪些人，界面发生刷新？
+    答：发布订阅者模式
+   -->
+
+  <div id="app">
+    {{message}}
+  </div>
+
+  <script src="./js/vue.min.js"></script>
+  <script>
+    const app = new new Vue({
+      el: '#app',
+      data: {
+        message: '哈哈'
+      }
+    })
+  </script>
+  <script>
+    const obj = {
+      nmessage: 'hh',
+      name: 'zh'
+    }
+    Object.keys(obj).forEach(key => {
+      let value = obj[key]
+      Object.defineProperty(obj,key,{
+        set(newValue){
+          console.log('监听'+key+'改变');
+          value = newValue
+
+          //dep.notify()
+        },
+        get() {
+          console.log('监听'+key+'对应的值');
+          return value
+        }
+      })
+    })
+
+    //发布者订阅模式
+    //发布者
+    class Dep{
+      constructor() {
+        this.subs = []
+      }
+
+      addSub(watch){
+        this.subs.push(watch)
+      }
+
+      notify(){
+        this.subs.forEach(item => {
+          item.update()
+        })
+      }
+    }
+    //订阅者
+    class Watch{
+      constructor(name) {
+        this.name = name
+      }
+
+      pudate() {
+        console.log(this.name + '发生了改变');
+      }
+    }
+    const dep = new Dep()
+    const w1 = new Watch('张三')
+    dep.addSub(w1)
+    dep.notify()
+  </script>
+</body>
+</html>

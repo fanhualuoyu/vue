@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+  <h2 v-if="isShow" id="aaa">{{message}}</h2><!--直接就不在dom中了-->
+  <h2 v-show="isShow" id="bbb">{{message}}</h2><!--使用的时display:none-->
+</div>
+
+<script src="../js/vue.min.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: '你好啊',
+      isShow: true
+    }
+  })
+</script>
+
+</body>
+</html>

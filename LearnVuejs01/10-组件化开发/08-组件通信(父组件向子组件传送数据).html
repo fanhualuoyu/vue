@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+  <cpn :cmovies="movies" :cmessage="message"></cpn>
+</div>
+
+<template id="cpnTemplate">
+  <div>
+    <ul>
+      <li v-for="item in cmovies">{{item}}</li>
+    </ul>
+    {{cmessage}}
+  </div>
+</template>
+
+<script src="../js/vue.min.js"></script>
+<script>
+  // <!--父传子-->
+  const cpn = {
+    template: '#cpnTemplate',
+    //props: ['cmovies','cmessage'],
+    props: {
+      //1.类型限制：(支持的类型：String Number Boolean Array Object Date Function Symbol)
+      //cmovies: Array,
+      //cmessage:String
+
+      //2.提供一些默认值
+      cmessage: {
+        type: String,
+        default: 'test',
+        required: true
+      },
+      cmovies: {
+        type: Array,
+        default() {
+          return []
+        }
+      }
+    },
+    data(){
+      return {
+
+      }
+    }
+  }
+
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: '你好啊',
+      movies: ['火影忍者','海贼王','奥特曼']
+    },
+    components:{
+      'cpn':cpn
+    }
+  })
+</script>
+
+</body>
+</html>

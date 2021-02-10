@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+  <cpn></cpn>
+  <cpn></cpn>
+  <cpn ref="c"></cpn>
+  <button @click="btnClick">按钮</button>
+</div>
+
+<template id="cpn">
+  <div>我是组件！</div>
+</template>
+
+<script src="../js/vue.min.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: '你好啊'
+    },
+    components: {
+      cpn: {
+        template: '#cpn',
+        data(){
+          return {
+            name: '我是子组件的name'
+          }
+        },
+        methods: {
+          showMessage(){
+            console.log('showMessage')
+          }
+        }
+      }
+    },
+    methods: {
+      btnClick(){
+        //1.$children
+        console.log(this.$children)
+        for (let c of this.$children){
+          console.log(c.name)
+          c.showMessage()
+        }
+
+        //2.$refs => 对象类型，默认是一个空对象，要加上ref
+        console.log(this.$refs.c.name)
+      }
+    }
+  })
+</script>
+
+</body>
+</html>
